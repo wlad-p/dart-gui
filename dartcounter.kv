@@ -1,0 +1,38 @@
+<Keyboard>
+
+    GridLayout:
+        cols: 3
+        size: root.width, 300
+
+        Button:
+            text: "1"
+        Button:
+            text: "2"
+        Button:
+            text: "3"
+        Button:
+            text: "4"
+        Button:
+            text: "5"
+        Button:
+            text: "6"
+        Button:
+            text: "7"
+        Button:
+            text: "8"
+        Button:
+            text: "9"
+
+        Button: 
+            text: "<-"
+            on_press:root.revert()
+        
+        Button: 
+            text: "0"
+
+        Button:
+            text: "OK"
+            on_press:root.submit()
+
+<PlayBoard>
+    
