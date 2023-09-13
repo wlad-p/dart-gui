@@ -1,0 +1,110 @@
+<Gameboard>
+
+    #Players
+    GridLayout:
+        size: root.width, root.height
+        cols: 1
+        
+        canvas:
+            Color:
+                rgb: 1,1,1
+            Rectangle:
+                size: self.size
+        
+        #Player 1
+        GridLayout:
+            size: root.width, root.height * 0.7
+            cols: 1
+            rows: 3
+            size_hint_y: None
+
+
+
+            Label:
+                id: p1_name
+                size: self.texture_size
+                text: "PLAYER 1"
+                color: 0,0,0
+
+            Label:
+                id: p1_points
+                size: self.texture_size
+                text: "501"
+                color: 1,0,0
+            GridLayout:
+                rows: 1
+                cols: 2
+
+                Label:
+                    id: p1_last
+                    size: self.texture_size
+                    text: "last throw: 12"
+                    color: 0,0,0
+                    
+
+                Label:
+                    id: p1_avg
+                    size: self.texture_size
+                    text: "avg: 35"
+                    color: 0,0,0
+            
+        
+
+        # Keyboard
+        GridLayout
+            cols: 1
+            size: root.width, root.height * 0.3
+            size_hint_y: None
+            
+
+            GridLayout:
+                cols: 3
+                size: root.width, root.height * 0.05
+                size_hint_y: None
+
+                Button:
+                    text: "Revert"
+
+                TextInput:
+                    
+
+                Button:
+                    text: "<-"
+
+            GridLayout:
+                cols: 3
+                size: root.width, root.height * 0.25
+                size_hint_y: None
+
+                Button:
+                    text: "1"
+                Button:
+                    text: "2"
+                Button:
+                    text: "3"
+                Button:
+                    text: "4"
+                Button:
+                    text: "5"
+                Button:
+                    text: "6"
+                Button:
+                    text: "7"
+                Button:
+                    text: "8"
+                Button:
+                    text: "9"
+
+                Button: 
+                    text: "pass"
+                    on_press:root.revert()
+                
+                Button: 
+                    text: "0"
+
+                Button:
+                    text: "OK"
+                    on_press:root.submit()
+
+
+

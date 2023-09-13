@@ -1,2 +1,2 @@
 #!/bin/bash
-source kivy_env/bin/activate
+source ~/projects/dart-gui/kivy_venv/bin/activate

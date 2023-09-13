@@ -9,22 +9,19 @@ from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 
-class Keyboard(Widget):
-    name = ObjectProperty(None)
-    email = ObjectProperty(None)
-
+class Gameboard(Widget):
+    p1_name = ObjectProperty()
+    
+    
     def submit(self):
-        pass
+        self.ids.p1_name.text = "JA GESCHAFFT"
 
     def revert(self):
         pass
 
-class GameBoard(Widget):
-    pass
-
-class DartCounter(App):
+class MainApp(App):
     def build(self):
-        return Keyboard()
+        return Gameboard()
     
 if __name__ == "__main__":
-    DartCounter().run()
+    MainApp().run()
