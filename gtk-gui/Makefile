@@ -1,4 +1,4 @@
-PROG = startGtkApp
+PROG = start
 
 CC = gcc
 CFLAGS = `pkg-config --cflags gtk+-3.0`
