@@ -1,6 +1,7 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include "page_start.h"
 #include "page_menu.h"
+#include "page_new_player.h"
 
 int main(int argc, char **argv){
 
@@ -18,6 +19,9 @@ int main(int argc, char **argv){
 	gtk_stack_add_named(GTK_STACK(stack), page_start, "page_start");
 	GtkWidget *page_menu = create_page_menu(window, stack);
 	gtk_stack_add_named(GTK_STACK(stack), page_menu, "page_menu");
+	GtkWidget* page_new_player = create_page_new_player(window, stack);
+	gtk_stack_add_named(GTK_STACK(stack), page_new_player, "page_new_player");
+	
 
 
 	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit),NULL);
