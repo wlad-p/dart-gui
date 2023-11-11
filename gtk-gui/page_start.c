@@ -1,13 +1,13 @@
 #include <gtk-3.0/gtk/gtk.h>
-#include "stack_page1.h"
+#include "page_start.h"
 
 static void button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Button is pressed on Page 2\n");
     GtkStack *stack = GTK_STACK(data);
-    gtk_stack_set_visible_child_name(stack, "page1");
+    gtk_stack_set_visible_child_name(stack, "page_menu");
 }
 
-GtkWidget *create_stack_page1(GtkWidget *window, GtkWidget *stack){
+GtkWidget *create_page_start(GtkWidget *window, GtkWidget *stack){
 	GtkWidget *grid = gtk_grid_new();
 
 	GtkWidget *label1 = gtk_label_new("Wlarts");

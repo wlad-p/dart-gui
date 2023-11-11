@@ -5,7 +5,7 @@ CFLAGS = `pkg-config --cflags gtk+-3.0`
 LIBS = `pkg-config --libs gtk+-3.0`
 
 ${PROG}: ${PROG}.c
-	${CC} ${CFLAGS} -o ${PROG} ${PROG}.c stack_page1.c stack_page2.c ${LIBS}	
+	${CC} ${CFLAGS} -o ${PROG} ${PROG}.c page_start.c page_menu.c ${LIBS}	
 
 run: ${PROG}
 	./${PROG}
