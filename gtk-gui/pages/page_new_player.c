@@ -9,7 +9,6 @@ GtkWidget *player_name;
 static void press_key(GtkWidget* widget, gpointer data){
 
 	const char *text = gtk_entry_get_text(GTK_ENTRY(player_name));
-	g_print("%s",text);
 	const char *letter = (char *)data;
 
 	//Append string
@@ -21,15 +20,47 @@ static void press_key(GtkWidget* widget, gpointer data){
 	free(new_text);
 }
 
+static void confirm(GtkWidget *widget, gpointer data){
+
+	GtkStack *stack = GTK_STACK(data);
+    gtk_stack_set_visible_child_name(stack, "page_menu");
+}
+static void cancel(GtkWidget *widget, gpointer data){
+	
+	GtkStack *stack = GTK_STACK(data);
+    gtk_stack_set_visible_child_name(stack, "page_menu");
+}
+
 GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 
-	GtkWidget *grid = gtk_grid_new();
+	GtkWidget* main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+
+
+	GtkWidget *label = gtk_label_new("Add a new player");
+	GtkWidget *photo = gtk_image_new_from_file("images/example.jpeg");
+
+	//Buttons
+	GtkWidget *buttons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+	GtkWidget *btn_confirm = gtk_button_new_with_label("Confirm");
+	g_signal_connect(btn_confirm, "clicked", G_CALLBACK(confirm),stack);
+	GtkWidget *btn_cancel = gtk_button_new_with_label("Cancel");
+	g_signal_connect(btn_cancel, "clicked", G_CALLBACK(cancel), stack);
+
+	gtk_box_pack_start(GTK_BOX(buttons),btn_confirm, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(buttons),btn_cancel, FALSE, FALSE, 50);
+	gtk_box_set_homogeneous(GTK_BOX(buttons), TRUE);
+
+
+	// ########### Keyboard ###################
 
 	player_name = gtk_entry_new();
-	
 	GtkWidget* row1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+
+	gtk_box_set_homogeneous(GTK_BOX(row1), TRUE);
+	gtk_box_set_homogeneous(GTK_BOX(row2), TRUE);
+	gtk_box_set_homogeneous(GTK_BOX(row3), TRUE);
 
 	// Row 1
 	GtkWidget* q = gtk_button_new_with_label("Q");
@@ -138,15 +169,18 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	g_signal_connect(m, "clicked", G_CALLBACK(press_key), "M");
 	gtk_box_pack_start(GTK_BOX(row3), m, FALSE, FALSE, 0);
 
-	gtk_grid_attach(GTK_GRID(grid),player_name, 0,0,1,1);
-	gtk_grid_attach(GTK_GRID(grid), row1, 0,1,1,1);
-	gtk_grid_attach(GTK_GRID(grid), row2, 0,2,1,1);	
-	gtk_grid_attach(GTK_GRID(grid), row3, 0,3,1,1);	
 
+	GtkWidget *keyboard = gtk_grid_new();
+	gtk_grid_attach(GTK_GRID(keyboard), row1, 0,0,1,1);
+	gtk_grid_attach(GTK_GRID(keyboard), row2, 0,1,1,1);	
+	gtk_grid_attach(GTK_GRID(keyboard), row3, 0,2,1,1);
 
-	//gtk_grid_set_row_homogeneous(GTK_GRID(grid), TRUE);
-	//gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
+	gtk_box_pack_start(GTK_BOX(main_box),label, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(main_box),photo, FALSE, FALSE, 50);	
+	gtk_box_pack_start(GTK_BOX(main_box),player_name, FALSE, FALSE, 50);	
+	gtk_box_pack_start(GTK_BOX(main_box),buttons, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(main_box),keyboard, FALSE, FALSE, 50);
 	
-
-	return grid;
+		
+	return main_box;
 }

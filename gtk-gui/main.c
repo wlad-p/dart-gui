@@ -1,7 +1,7 @@
 #include <gtk-3.0/gtk/gtk.h>
-#include "page_start.h"
-#include "page_menu.h"
-#include "page_new_player.h"
+#include "pages/page_start.h"
+#include "pages/page_menu.h"
+#include "pages/page_new_player.h"
 
 int main(int argc, char **argv){
 
