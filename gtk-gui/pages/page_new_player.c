@@ -1,6 +1,7 @@
 // Page New Player
 #include <gtk-3.0/gtk/gtk.h>
 #include "page_new_player.h"
+#include "../game_state.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -20,8 +21,24 @@ static void press_key(GtkWidget* widget, gpointer data){
 	free(new_text);
 }
 
+static void delete_character(GtkWidget *widget, gpointer data){
+	const char *text = gtk_entry_get_text(GTK_ENTRY(player_name));
+	int len = strlen(text);
+
+	if(len > 0){
+		char *new_text = (char *)malloc(len + 1);
+		strcpy(new_text, text);
+		new_text[len-1] = '\0';
+		gtk_entry_set_text(GTK_ENTRY(player_name), new_text);
+		free(new_text);
+	}
+}
+
 static void confirm(GtkWidget *widget, gpointer data){
 
+	const char *text = gtk_entry_get_text(GTK_ENTRY(player_name));
+	add_player(text);
+	
 	GtkStack *stack = GTK_STACK(data);
     gtk_stack_set_visible_child_name(stack, "page_menu");
 }
@@ -168,6 +185,10 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* m = gtk_button_new_with_label("M");
 	g_signal_connect(m, "clicked", G_CALLBACK(press_key), "M");
 	gtk_box_pack_start(GTK_BOX(row3), m, FALSE, FALSE, 0);
+
+	GtkWidget* del = gtk_button_new_with_label("<x|");
+	g_signal_connect(del, "clicked", G_CALLBACK(delete_character),stack);
+	gtk_box_pack_start(GTK_BOX(row3), del, FALSE, FALSE, 0);
 
 
 	GtkWidget *keyboard = gtk_grid_new();
