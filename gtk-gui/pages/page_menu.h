@@ -6,5 +6,6 @@
 
 
 GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack);
+void reload_menu();
 
 #endif

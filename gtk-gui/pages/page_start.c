@@ -3,9 +3,9 @@
 #include "page_start.h"
 
 static void open_menu(GtkWidget *widget, gpointer data) {
-    g_print("Button is pressed on Page 2\n");
     GtkStack *stack = GTK_STACK(data);
     gtk_stack_set_visible_child_name(stack, "page_menu");
+    
 }
 
 GtkWidget *create_page_start(GtkWidget *window, GtkWidget *stack){

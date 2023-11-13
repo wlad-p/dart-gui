@@ -1,6 +1,10 @@
 #include <gtk-3.0/gtk/gtk.h>
+#include "../game_state.h"
+#include <stdlib.h>
 
 GtkWidget *entry_score;
+GtkWidget *box_score_cards_overview;
+GtkWidget *box_main;
 
 static void press_key(GtkWidget* widget, gpointer data){
 
@@ -16,6 +20,37 @@ static void press_key(GtkWidget* widget, gpointer data){
 	free(new_text);
 }
 
+void reload_game(){
+	
+	gtk_widget_destroy(box_score_cards_overview);
+	box_score_cards_overview = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
+
+	for (int i=0;i<game.num_players;i++){
+
+		GtkWidget *box_score_card = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+		GtkWidget *label_name = gtk_label_new(game.player_names[i]);
+
+		//points to string
+		int len = snprintf(NULL, 0, "%d", game.scores[i]);
+		char *points_as_string = malloc(len + 1);
+		snprintf(points_as_string, len+1, "%d", game.scores[i]);
+		
+		GtkWidget *label_points = gtk_label_new(points_as_string);
+	
+		gtk_box_pack_start(GTK_BOX(box_score_card),label_name, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_score_card),label_points, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_score_cards_overview),box_score_card, FALSE, FALSE, 0);
+
+		g_print("%s", game.player_names[i]);
+		free(points_as_string);
+		
+	}
+
+	gtk_box_pack_start(GTK_BOX(box_main),box_score_cards_overview, FALSE, FALSE, 50);
+	gtk_widget_show_all(box_main);
+}
+
+
 static void press_delete(GtkWidget *widget, gpointer data){
 	const char *text = gtk_entry_get_text(GTK_ENTRY(entry_score));
 	int len = strlen(text);
@@ -30,7 +65,14 @@ static void press_delete(GtkWidget *widget, gpointer data){
 }
 
 static void press_enter(GtkWidget *widget, gpointer data){
-	g_print("button confirm \n");
+	const char *text = gtk_entry_get_text(GTK_ENTRY(entry_score));
+	int points_entered = atoi(text);
+
+	if(points_entered > 0 && points_entered < 180){
+		submit_points(points_entered);
+	}
+	gtk_entry_set_text(GTK_ENTRY(entry_score), "");
+	reload_game();
 }
 
 static void press_revert(GtkWidget *widget, gpointer data){
@@ -38,15 +80,16 @@ static void press_revert(GtkWidget *widget, gpointer data){
 }
 
 static void press_no_score(GtkWidget *widget, gpointer data){
-	g_print("button no score \n");
+	next_player();
 }
+
 
 
 GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
-	GtkWidget* main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+	box_main = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 
-
+	
 	// ########### Keyboard ###################
 
 	entry_score = gtk_entry_new();
@@ -138,8 +181,8 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	gtk_grid_attach(GTK_GRID(keyboard), row4, 0,4,1,1);
 
 
-	gtk_box_pack_start(GTK_BOX(main_box),keyboard, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(box_main),keyboard, FALSE, FALSE, 50);
 	
 		
-	return main_box;
+	return box_main;
 }

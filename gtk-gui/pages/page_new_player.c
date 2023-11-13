@@ -2,6 +2,7 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include "page_new_player.h"
 #include "../game_state.h"
+#include "page_menu.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -38,8 +39,10 @@ static void confirm(GtkWidget *widget, gpointer data){
 
 	const char *text = gtk_entry_get_text(GTK_ENTRY(player_name));
 	add_player(text);
+	gtk_entry_set_text(GTK_ENTRY(player_name), "");
 	
 	GtkStack *stack = GTK_STACK(data);
+	reload_menu();
     gtk_stack_set_visible_child_name(stack, "page_menu");
 }
 static void cancel(GtkWidget *widget, gpointer data){
