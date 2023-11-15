@@ -77,10 +77,12 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* row1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
-
+	GtkWidget* row4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+	
 	gtk_box_set_homogeneous(GTK_BOX(row1), TRUE);
 	gtk_box_set_homogeneous(GTK_BOX(row2), TRUE);
 	gtk_box_set_homogeneous(GTK_BOX(row3), TRUE);
+	gtk_box_set_homogeneous(GTK_BOX(row4), TRUE);
 
 	// Row 1
 	GtkWidget* q = gtk_button_new_with_label("Q");
@@ -193,11 +195,16 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	g_signal_connect(del, "clicked", G_CALLBACK(delete_character),stack);
 	gtk_box_pack_start(GTK_BOX(row3), del, FALSE, FALSE, 0);
 
+	GtkWidget* space = gtk_button_new_with_label(" ");
+	g_signal_connect(space, "clicked", G_CALLBACK(press_key), " ");
+	gtk_box_pack_start(GTK_BOX(row4), space, FALSE, FALSE, 0);
+
 
 	GtkWidget *keyboard = gtk_grid_new();
 	gtk_grid_attach(GTK_GRID(keyboard), row1, 0,0,1,1);
 	gtk_grid_attach(GTK_GRID(keyboard), row2, 0,1,1,1);	
 	gtk_grid_attach(GTK_GRID(keyboard), row3, 0,2,1,1);
+	gtk_grid_attach(GTK_GRID(keyboard), row4, 0,3,1,1);
 
 	gtk_box_pack_start(GTK_BOX(main_box),label, FALSE, FALSE, 50);
 	gtk_box_pack_start(GTK_BOX(main_box),photo, FALSE, FALSE, 50);	

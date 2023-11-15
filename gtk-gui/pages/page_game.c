@@ -36,11 +36,14 @@ void reload_game(){
 		snprintf(points_as_string, len+1, "%d", game.scores[i]);
 		
 		GtkWidget *label_points = gtk_label_new(points_as_string);
-	
+		GtkWidget *photo = gtk_image_new_from_file("images/example.jpeg");
+
+		gtk_box_pack_start(GTK_BOX(box_score_card),photo, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_name, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_points, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_cards_overview),box_score_card, FALSE, FALSE, 0);
 
+		gtk_box_set_homogeneous(GTK_BOX(box_score_card), TRUE);
 		g_print("%s", game.player_names[i]);
 		free(points_as_string);
 		

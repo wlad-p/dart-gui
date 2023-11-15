@@ -1,3 +1,4 @@
+
 // Page Menu
 #include <gtk-3.0/gtk/gtk.h>
 #include "page_menu.h"
@@ -16,8 +17,18 @@ static void start_game(GtkWidget *widget, gpointer data) {
 }
 
 static void open_page_new_player(GtkWidget* widget, gpointer data){
-	GtkStack *stack = GTK_STACK(data);
-    gtk_stack_set_visible_child_name(stack, "page_new_player");
+	if(game.num_players < 4){
+		GtkStack *stack = GTK_STACK(data);
+    	gtk_stack_set_visible_child_name(stack, "page_new_player");
+	}
+	else{
+		g_print("More than 4 Players");
+	}
+
+}
+
+static void delete_player(GtkWidget* widget, gpointer data){
+	g_print("delete player");
 }
 
 void reload_menu(){
@@ -29,6 +40,8 @@ void reload_menu(){
 
 		GtkWidget *box_player = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 		GtkWidget *name = gtk_label_new(game.player_names[i]);
+		GtkWidget *btn_delete_player = gtk_button_new_with_label("delete");
+		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),NULL);
 		gtk_box_pack_start(GTK_BOX(box_player),name, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_players_overview),box_player, FALSE, FALSE, 0);
 
