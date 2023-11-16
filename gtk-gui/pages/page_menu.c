@@ -4,6 +4,7 @@
 #include "page_menu.h"
 #include "../game_state.h"
 #include "page_game.h"
+#include <stdlib.h>
 
 GtkWidget *box;
 static GtkWidget *box_players_overview;
@@ -28,7 +29,15 @@ static void open_page_new_player(GtkWidget* widget, gpointer data){
 }
 
 static void delete_player(GtkWidget* widget, gpointer data){
-	g_print("delete player");
+
+	g_print("delete player button\n");
+
+	const char *player_id_string = (char *)data;
+	g_print("data: %s", player_id_string);
+
+//	g_print("player id: %ld\n", player_id);
+
+	//reload_menu();
 }
 
 void reload_menu(){
@@ -40,12 +49,21 @@ void reload_menu(){
 
 		GtkWidget *box_player = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 		GtkWidget *name = gtk_label_new(game.player_names[i]);
+		
 		GtkWidget *btn_delete_player = gtk_button_new_with_label("delete");
-		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),NULL);
+		char *player_id = (char *)malloc(sizeof(char) * 2);
+		sprintf(player_id, "%d", i);
+
+		g_print("reload func, i: %d\n", i);
+		g_print("reload func, player_id: %s\n", player_id);
+		
+		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),player_id);
+
 		gtk_box_pack_start(GTK_BOX(box_player),name, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_player),btn_delete_player, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_players_overview),box_player, FALSE, FALSE, 0);
 
-		g_print("%s", game.player_names[i]);
+		free(player_id);
 		
 	}
 
