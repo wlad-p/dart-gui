@@ -44,7 +44,6 @@ void reload_game(){
 		gtk_box_pack_start(GTK_BOX(box_score_cards_overview),box_score_card, FALSE, FALSE, 0);
 
 		gtk_box_set_homogeneous(GTK_BOX(box_score_card), TRUE);
-		g_print("%s", game.player_names[i]);
 		free(points_as_string);
 		
 	}
@@ -79,7 +78,10 @@ static void press_enter(GtkWidget *widget, gpointer data){
 }
 
 static void press_revert(GtkWidget *widget, gpointer data){
-	g_print("button revert \n");
+
+	revert();
+	
+	reload_game();
 }
 
 static void press_no_score(GtkWidget *widget, gpointer data){

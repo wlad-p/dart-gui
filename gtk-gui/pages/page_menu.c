@@ -23,19 +23,17 @@ static void open_page_new_player(GtkWidget* widget, gpointer data){
     	gtk_stack_set_visible_child_name(stack, "page_new_player");
 	}
 	else{
-		g_print("More than 4 Players");
+	//	g_print("More than 4 Players");
 	}
 
 }
 
 static void delete_player(GtkWidget* widget, gpointer data){
 
-	g_print("delete player button\n");
+//	g_print("delete player button\n");
 
 	const char *player_id_string = (char *)data;
-	g_print("data: %s", player_id_string);
-
-//	g_print("player id: %ld\n", player_id);
+//	g_print("data: %s", player_id_string);
 
 	//reload_menu();
 }
@@ -54,8 +52,8 @@ void reload_menu(){
 		char *player_id = (char *)malloc(sizeof(char) * 2);
 		sprintf(player_id, "%d", i);
 
-		g_print("reload func, i: %d\n", i);
-		g_print("reload func, player_id: %s\n", player_id);
+	//	g_print("reload func, i: %d\n", i);
+	//	g_print("reload func, player_id: %s\n", player_id);
 		
 		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),player_id);
 
@@ -72,6 +70,8 @@ void reload_menu(){
 }
 
 GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
+
+	init();
 
 	box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 

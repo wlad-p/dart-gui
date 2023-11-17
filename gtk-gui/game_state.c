@@ -4,11 +4,17 @@
 
 GameState game;
 
-void init(){}
+void init(){
+
+	for(int i = 0; i < 100; i++){
+		for(int j = 0; j < 4; j++){
+			game.throws[j][i] = -1;
+		}
+	}
+	
+}
 
 void print_current_player(){
-
-	g_print("SCORE: %d", game.current_player);
 }
 
 void add_player(const char *name){
@@ -22,7 +28,35 @@ void next_player(){
 	game.current_player =(game.current_player + 1) % game.num_players;
 }
 
+void previous_player(){
+	game.current_player = (game.current_player - 1) % game.num_players;
+}
+
 void submit_points(int points){
 	game.scores[game.current_player] -= points;
+
+	for(int i=0; i < 100; i++){
+		if(game.throws[game.current_player][i] == -1){
+			game.throws[game.current_player][i] = points;
+			break;
+		}
+	}
+
 	next_player();
+}
+
+void revert(){
+	previous_player();
+
+	int last_value;
+	for(int i = 0; i < 100; i++){
+		if(game.throws[game.current_player][i] == -1 && i>0 ){
+			last_value = game.throws[game.current_player][i-1];
+			game.throws[game.current_player][i-1] == -1;
+			break;
+		}
+	}
+
+	game.scores[game.current_player] += last_value;
+	
 }
