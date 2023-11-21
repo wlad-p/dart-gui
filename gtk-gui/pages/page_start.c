@@ -23,7 +23,7 @@ GtkWidget *create_page_start(GtkWidget *window, GtkWidget *stack){
 
 	//Button
 	GtkWidget *btn = gtk_button_new_with_label("Start");
-	gtk_widget_set_class(GTK_WIDGET(btn), "btn");
+	gtk_widget_set_name(GTK_WIDGET(btn), "btn");
 	g_signal_connect(btn, "clicked", G_CALLBACK(open_menu),stack);
 	//gtk_container_add(GTK_CONTAINER(window),btn);
 	gtk_grid_attach(GTK_GRID(grid), btn, 0, 2, 1,1);

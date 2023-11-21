@@ -1,5 +1,7 @@
-
-
-.btn{
+btn{
 	background-color: red;
+}
+
+*{
+	background-color: green;
 }

@@ -24,6 +24,7 @@ void reload_game(){
 	
 	gtk_widget_destroy(box_score_cards_overview);
 	box_score_cards_overview = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
+	
 
 	for (int i=0;i<game.num_players;i++){
 
@@ -37,7 +38,8 @@ void reload_game(){
 		
 		GtkWidget *label_points = gtk_label_new(points_as_string);
 		GtkWidget *photo = gtk_image_new_from_file("images/example.jpeg");
-
+		gtk_widget_set_size_request(photo, 50,50);
+		
 		gtk_box_pack_start(GTK_BOX(box_score_card),photo, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_name, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_points, FALSE, FALSE, 0);
@@ -126,55 +128,57 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	// Row 1
 	GtkWidget* btn_one = gtk_button_new_with_label("1");
 	g_signal_connect(btn_one, "clicked", G_CALLBACK(press_key), "1");
-	gtk_box_pack_start(GTK_BOX(row1), btn_one, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row1), btn_one, TRUE, TRUE, 0);
+	gtk_widget_set_hexpand(btn_one, TRUE);
 
 	GtkWidget* btn_two = gtk_button_new_with_label("2");
 	g_signal_connect(btn_two, "clicked", G_CALLBACK(press_key), "2");
-	gtk_box_pack_start(GTK_BOX(row1), btn_two, FALSE, FALSE, 0);
-	
+	gtk_box_pack_start(GTK_BOX(row1), btn_two, TRUE, TRUE, 0);
+	gtk_widget_set_hexpand(btn_two, TRUE);
+
 	GtkWidget* btn_three = gtk_button_new_with_label("3");
 	g_signal_connect(btn_three, "clicked", G_CALLBACK(press_key), "3");
-	gtk_box_pack_start(GTK_BOX(row1), btn_three, FALSE, FALSE, 0);
-	
+	gtk_box_pack_start(GTK_BOX(row1), btn_three, TRUE, TRUE, 0);
+	gtk_widget_set_hexpand(btn_three, TRUE);	
 	//Row 2
 	GtkWidget* btn_four = gtk_button_new_with_label("4");
 	g_signal_connect(btn_four, "clicked", G_CALLBACK(press_key), "4");
-	gtk_box_pack_start(GTK_BOX(row2), btn_four, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row2), btn_four, TRUE, TRUE, 0);
 
 	GtkWidget* btn_five = gtk_button_new_with_label("5");
 	g_signal_connect(btn_five, "clicked", G_CALLBACK(press_key), "5");
-	gtk_box_pack_start(GTK_BOX(row2), btn_five, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row2), btn_five, TRUE, TRUE, 0);
 
 	GtkWidget* btn_six = gtk_button_new_with_label("6");
 	g_signal_connect(btn_six, "clicked", G_CALLBACK(press_key), "6");
-	gtk_box_pack_start(GTK_BOX(row2), btn_six, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row2), btn_six, TRUE, TRUE, 0);
 
 
 	//Row3
 	GtkWidget* btn_seven = gtk_button_new_with_label("7");
 	g_signal_connect(btn_seven, "clicked", G_CALLBACK(press_key), "7");
-	gtk_box_pack_start(GTK_BOX(row3), btn_seven, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row3), btn_seven, TRUE, TRUE, 0);
 
 	GtkWidget* btn_eight = gtk_button_new_with_label("8");
 	g_signal_connect(btn_eight, "clicked", G_CALLBACK(press_key), "8");
-	gtk_box_pack_start(GTK_BOX(row3), btn_eight, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row3), btn_eight, TRUE, TRUE, 0);
 
 	GtkWidget* btn_nine = gtk_button_new_with_label("9");
 	g_signal_connect(btn_nine, "clicked", G_CALLBACK(press_key), "9");
-	gtk_box_pack_start(GTK_BOX(row3), btn_nine, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row3), btn_nine, TRUE, TRUE, 0);
 
 	//Row4
 	GtkWidget* btn_no_score = gtk_button_new_with_label("X");
 	g_signal_connect(btn_no_score, "clicked", G_CALLBACK(press_no_score), NULL);
-	gtk_box_pack_start(GTK_BOX(row4), btn_no_score, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row4), btn_no_score, TRUE, TRUE, 0);
 
 	GtkWidget* btn_zero = gtk_button_new_with_label("0");
 	g_signal_connect(btn_zero, "clicked", G_CALLBACK(press_key), "0");
-	gtk_box_pack_start(GTK_BOX(row4), btn_zero, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row4), btn_zero, TRUE, TRUE, 0);
 
 	GtkWidget* btn_enter = gtk_button_new_with_label("OK");
 	g_signal_connect(btn_enter, "clicked", G_CALLBACK(press_enter), NULL);
-	gtk_box_pack_start(GTK_BOX(row4), btn_enter, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(row4), btn_enter, TRUE, TRUE, 0);
 
 
 	GtkWidget *keyboard = gtk_grid_new();
@@ -186,7 +190,7 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	gtk_grid_attach(GTK_GRID(keyboard), row4, 0,4,1,1);
 
 
-	gtk_box_pack_start(GTK_BOX(box_main),keyboard, FALSE, FALSE, 50);
+	gtk_box_pack_end(GTK_BOX(box_main),keyboard, FALSE, FALSE, 50);
 	
 		
 	return box_main;
