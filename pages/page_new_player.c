@@ -78,77 +78,51 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* row2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+	GtkWidget* row5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	
 	gtk_box_set_homogeneous(GTK_BOX(row1), TRUE);
 	gtk_box_set_homogeneous(GTK_BOX(row2), TRUE);
 	gtk_box_set_homogeneous(GTK_BOX(row3), TRUE);
 	gtk_box_set_homogeneous(GTK_BOX(row4), TRUE);
 
-	// Row 1
-	GtkWidget* q = gtk_button_new_with_label("Q");
-	g_signal_connect(q, "clicked", G_CALLBACK(press_key), "Q");
-	gtk_box_pack_start(GTK_BOX(row1), q, TRUE, TRUE, 0);
 
-	GtkWidget* w = gtk_button_new_with_label("W");
-	g_signal_connect(w, "clicked", G_CALLBACK(press_key), "W");
-	gtk_box_pack_start(GTK_BOX(row1), w, TRUE, TRUE, 0);
-	
+	// Row 1
+	GtkWidget* a = gtk_button_new_with_label("A");
+	g_signal_connect(a, "clicked", G_CALLBACK(press_key), "A");
+	gtk_box_pack_start(GTK_BOX(row1), a, TRUE, TRUE, 0);
+
+	GtkWidget* b = gtk_button_new_with_label("B");
+	g_signal_connect(b, "clicked", G_CALLBACK(press_key), "B");
+	gtk_box_pack_start(GTK_BOX(row1), b, TRUE, TRUE, 0);
+
+	GtkWidget* c = gtk_button_new_with_label("C");
+	g_signal_connect(c, "clicked", G_CALLBACK(press_key), "C");
+	gtk_box_pack_start(GTK_BOX(row1), c, TRUE, TRUE, 0);
+
+	GtkWidget* d = gtk_button_new_with_label("D");
+	g_signal_connect(d, "clicked", G_CALLBACK(press_key), "D");
+	gtk_box_pack_start(GTK_BOX(row1), d, TRUE, TRUE, 0);
+
 	GtkWidget* e = gtk_button_new_with_label("E");
 	g_signal_connect(e, "clicked", G_CALLBACK(press_key), "E");
 	gtk_box_pack_start(GTK_BOX(row1), e, TRUE, TRUE, 0);
 
-	GtkWidget* r = gtk_button_new_with_label("R");
-	g_signal_connect(r, "clicked", G_CALLBACK(press_key), "R");
-	gtk_box_pack_start(GTK_BOX(row1), r, TRUE, TRUE, 0);
-
-	GtkWidget* t = gtk_button_new_with_label("T");
-	g_signal_connect(t, "clicked", G_CALLBACK(press_key), "T");
-	gtk_box_pack_start(GTK_BOX(row1), t, TRUE, TRUE, 0);
-
-	GtkWidget* z = gtk_button_new_with_label("Z");
-	g_signal_connect(z, "clicked", G_CALLBACK(press_key), "Z");
-	gtk_box_pack_start(GTK_BOX(row1), z, TRUE, TRUE, 0);
-	
-	GtkWidget* u = gtk_button_new_with_label("U");
-	g_signal_connect(u, "clicked", G_CALLBACK(press_key), "U");
-	gtk_box_pack_start(GTK_BOX(row1), u, TRUE, TRUE, 0);
-
-	GtkWidget* i = gtk_button_new_with_label("I");
-	g_signal_connect(i, "clicked", G_CALLBACK(press_key), "I");
-	gtk_box_pack_start(GTK_BOX(row1), i, TRUE, TRUE, 0);
-
-	GtkWidget* o = gtk_button_new_with_label("O");
-	g_signal_connect(o, "clicked", G_CALLBACK(press_key), "O");
-	gtk_box_pack_start(GTK_BOX(row1), o, TRUE, TRUE, 0);
-
-	GtkWidget* p = gtk_button_new_with_label("P");
-	g_signal_connect(p, "clicked", G_CALLBACK(press_key), "P");
-	gtk_box_pack_start(GTK_BOX(row1), p, TRUE, TRUE, 0);
-
-	//Row 2
-	GtkWidget* a = gtk_button_new_with_label("A");
-	g_signal_connect(a, "clicked", G_CALLBACK(press_key), "A");
-	gtk_box_pack_start(GTK_BOX(row2), a, TRUE, TRUE, 0);
-
-	GtkWidget* s = gtk_button_new_with_label("S");
-	g_signal_connect(s, "clicked", G_CALLBACK(press_key), "S");
-	gtk_box_pack_start(GTK_BOX(row2), s, TRUE, TRUE, 0);
-
-	GtkWidget* d = gtk_button_new_with_label("D");
-	g_signal_connect(d, "clicked", G_CALLBACK(press_key), "D");
-	gtk_box_pack_start(GTK_BOX(row2), d, TRUE, TRUE, 0);
-
 	GtkWidget* f = gtk_button_new_with_label("F");
 	g_signal_connect(f, "clicked", G_CALLBACK(press_key), "F");
-	gtk_box_pack_start(GTK_BOX(row2), f, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(row1), f, TRUE, TRUE, 0);
 
 	GtkWidget* g = gtk_button_new_with_label("G");
 	g_signal_connect(g, "clicked", G_CALLBACK(press_key), "G");
-	gtk_box_pack_start(GTK_BOX(row2), g, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(row1), g, TRUE, TRUE, 0);
 
+	// Row 2
 	GtkWidget* h = gtk_button_new_with_label("H");
 	g_signal_connect(h, "clicked", G_CALLBACK(press_key), "H");
 	gtk_box_pack_start(GTK_BOX(row2), h, TRUE, TRUE, 0);
+
+	GtkWidget* i = gtk_button_new_with_label("I");
+	g_signal_connect(i, "clicked", G_CALLBACK(press_key), "I");
+	gtk_box_pack_start(GTK_BOX(row2), i, TRUE, TRUE, 0);
 
 	GtkWidget* j = gtk_button_new_with_label("J");
 	g_signal_connect(j, "clicked", G_CALLBACK(press_key), "J");
@@ -162,49 +136,93 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	g_signal_connect(l, "clicked", G_CALLBACK(press_key), "L");
 	gtk_box_pack_start(GTK_BOX(row2), l, TRUE, TRUE, 0);
 
-	//Row3
-	GtkWidget* y = gtk_button_new_with_label("Y");
-	g_signal_connect(y, "clicked", G_CALLBACK(press_key), "Y");
-	gtk_box_pack_start(GTK_BOX(row3), y, TRUE, TRUE, 0);
-
-		GtkWidget* x = gtk_button_new_with_label("X");
-	g_signal_connect(x, "clicked", G_CALLBACK(press_key), "X");
-	gtk_box_pack_start(GTK_BOX(row3), x, TRUE, TRUE, 0);
-
-	GtkWidget* c = gtk_button_new_with_label("C");
-	g_signal_connect(c, "clicked", G_CALLBACK(press_key), "C");
-	gtk_box_pack_start(GTK_BOX(row3), c, TRUE, TRUE, 0);
-
-	GtkWidget* v = gtk_button_new_with_label("V");
-	g_signal_connect(v, "clicked", G_CALLBACK(press_key), "V");
-	gtk_box_pack_start(GTK_BOX(row3), v, TRUE, TRUE, 0);
-
-	GtkWidget* b = gtk_button_new_with_label("B");
-	g_signal_connect(b, "clicked", G_CALLBACK(press_key), "B");
-	gtk_box_pack_start(GTK_BOX(row3), b, TRUE, TRUE, 0);
+	GtkWidget* m = gtk_button_new_with_label("M");
+	g_signal_connect(m, "clicked", G_CALLBACK(press_key), "M");
+	gtk_box_pack_start(GTK_BOX(row2), m, TRUE, TRUE, 0);
 
 	GtkWidget* n = gtk_button_new_with_label("N");
 	g_signal_connect(n, "clicked", G_CALLBACK(press_key), "N");
-	gtk_box_pack_start(GTK_BOX(row3), n, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(row2), n, TRUE, TRUE, 0);
 
-	GtkWidget* m = gtk_button_new_with_label("M");
-	g_signal_connect(m, "clicked", G_CALLBACK(press_key), "M");
-	gtk_box_pack_start(GTK_BOX(row3), m, TRUE, TRUE, 0);
+	// Row3
+	GtkWidget* o = gtk_button_new_with_label("O");
+	g_signal_connect(o, "clicked", G_CALLBACK(press_key), "O");
+	gtk_box_pack_start(GTK_BOX(row3), o, TRUE, TRUE, 0);
+
+	GtkWidget* p = gtk_button_new_with_label("P");
+	g_signal_connect(p, "clicked", G_CALLBACK(press_key), "P");
+	gtk_box_pack_start(GTK_BOX(row3), p, TRUE, TRUE, 0);
+
+	GtkWidget* q = gtk_button_new_with_label("Q");
+	g_signal_connect(q, "clicked", G_CALLBACK(press_key), "Q");
+	gtk_box_pack_start(GTK_BOX(row3), q, TRUE, TRUE, 0);
+
+	GtkWidget* r = gtk_button_new_with_label("R");
+	g_signal_connect(r, "clicked", G_CALLBACK(press_key), "R");
+	gtk_box_pack_start(GTK_BOX(row3), r, TRUE, TRUE, 0);
+
+	GtkWidget* s = gtk_button_new_with_label("S");
+	g_signal_connect(s, "clicked", G_CALLBACK(press_key), "S");
+	gtk_box_pack_start(GTK_BOX(row3), s, TRUE, TRUE, 0);
+
+	GtkWidget* t = gtk_button_new_with_label("T");
+	g_signal_connect(t, "clicked", G_CALLBACK(press_key), "T");
+	gtk_box_pack_start(GTK_BOX(row3), t, TRUE, TRUE, 0);
+
+	GtkWidget* u = gtk_button_new_with_label("U");
+	g_signal_connect(u, "clicked", G_CALLBACK(press_key), "U");
+	gtk_box_pack_start(GTK_BOX(row3), u, TRUE, TRUE, 0);
+
+	// Row4
+	GtkWidget* v = gtk_button_new_with_label("V");
+	g_signal_connect(v, "clicked", G_CALLBACK(press_key), "V");
+	gtk_box_pack_start(GTK_BOX(row4), v, TRUE, TRUE, 0);
+
+	GtkWidget* w = gtk_button_new_with_label("W");
+	g_signal_connect(w, "clicked", G_CALLBACK(press_key), "W");
+	gtk_box_pack_start(GTK_BOX(row4), w, TRUE, TRUE, 0);
+
+	GtkWidget* x = gtk_button_new_with_label("X");
+	g_signal_connect(x, "clicked", G_CALLBACK(press_key), "X");
+	gtk_box_pack_start(GTK_BOX(row4), x, TRUE, TRUE, 0);
+
+	GtkWidget* y = gtk_button_new_with_label("Y");
+	g_signal_connect(y, "clicked", G_CALLBACK(press_key), "Y");
+	gtk_box_pack_start(GTK_BOX(row4), y, TRUE, TRUE, 0);
+
+	GtkWidget* z = gtk_button_new_with_label("Z");
+	g_signal_connect(z, "clicked", G_CALLBACK(press_key), "Z");
+	gtk_box_pack_start(GTK_BOX(row4), z, TRUE, TRUE, 0);
 
 	GtkWidget* del = gtk_button_new_with_label("<x|");
 	g_signal_connect(del, "clicked", G_CALLBACK(delete_character),stack);
-	gtk_box_pack_start(GTK_BOX(row3), del, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(row4), del, TRUE, TRUE, 0);
 
 	GtkWidget* space = gtk_button_new_with_label(" ");
 	g_signal_connect(space, "clicked", G_CALLBACK(press_key), " ");
-	gtk_box_pack_start(GTK_BOX(row4), space, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(row5), space, TRUE, TRUE, 0);
 
+	gtk_widget_set_size_request(row1, 100, 80);
+	gtk_widget_set_size_request(row2, 100, 80);
+	gtk_widget_set_size_request(row3, 100, 80);
+	gtk_widget_set_size_request(row4, 100, 80);
+	gtk_widget_set_size_request(row5, 100, 80);
+
+	gtk_widget_set_hexpand(row1, TRUE);
+	gtk_widget_set_hexpand(row2, TRUE);
+	gtk_widget_set_hexpand(row3, TRUE);
+	gtk_widget_set_hexpand(row4, TRUE);
+	gtk_widget_set_hexpand(row5, TRUE);
 
 	GtkWidget *keyboard = gtk_grid_new();
+
 	gtk_grid_attach(GTK_GRID(keyboard), row1, 0,0,1,1);
 	gtk_grid_attach(GTK_GRID(keyboard), row2, 0,1,1,1);	
 	gtk_grid_attach(GTK_GRID(keyboard), row3, 0,2,1,1);
 	gtk_grid_attach(GTK_GRID(keyboard), row4, 0,3,1,1);
+	gtk_grid_attach(GTK_GRID(keyboard), row5, 0,4,1,1);
+
+	
 
 	gtk_box_pack_start(GTK_BOX(main_box),label, TRUE, TRUE, 50);
 	gtk_box_pack_start(GTK_BOX(main_box),photo, TRUE, TRUE, 50);	
