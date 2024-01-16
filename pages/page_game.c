@@ -20,6 +20,13 @@ static void press_key(GtkWidget* widget, gpointer data){
 	free(new_text);
 }
 
+static void open_page_menu(GtkWidget* widget, gpointer data){
+
+	GtkStack *stack = GTK_STACK(data);
+	gtk_stack_set_visible_child_name(stack, "page_menu");
+
+}
+
 void reload_game(){
 	
 	gtk_widget_destroy(box_score_cards_overview);
@@ -72,7 +79,7 @@ static void press_enter(GtkWidget *widget, gpointer data){
 	const char *text = gtk_entry_get_text(GTK_ENTRY(entry_score));
 	int points_entered = atoi(text);
 
-	if(points_entered > 0 && points_entered < 180){
+	if(points_entered >= 0 && points_entered <= 180){
 		submit_points(points_entered);
 	}
 	gtk_entry_set_text(GTK_ENTRY(entry_score), "");
@@ -95,6 +102,21 @@ static void press_no_score(GtkWidget *widget, gpointer data){
 GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
 	box_main = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+
+	GtkStyleContext *game_context = gtk_widget_get_style_context(box_main);
+	gtk_style_context_add_class(game_context, "page_game");
+
+	GtkWidget *box_top_bar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	GtkWidget *btn_back = gtk_button_new_with_label("<");
+	g_signal_connect(btn_back, "clicked", G_CALLBACK(open_page_menu),stack);
+
+	GtkWidget *label_title = gtk_label_new("Darts");
+
+	GtkStyleContext *box_top_bar_context = gtk_widget_get_style_context(box_top_bar);
+	gtk_style_context_add_class(box_top_bar_context, "box_top_bar");
+
+	gtk_box_pack_start(GTK_BOX(box_top_bar),btn_back, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box_top_bar),label_title, FALSE, FALSE, 0);
 
 	
 	// ########### Keyboard ###################
@@ -181,11 +203,11 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	g_signal_connect(btn_enter, "clicked", G_CALLBACK(press_enter), NULL);
 	gtk_box_pack_start(GTK_BOX(row4), btn_enter, TRUE, TRUE, 0);
 
-	gtk_widget_set_size_request(row0, 100, 45);
-	gtk_widget_set_size_request(row1, 100,80);
-	gtk_widget_set_size_request(row2, 100, 80);
-	gtk_widget_set_size_request(row3, 100, 80);
-	gtk_widget_set_size_request(row4, 100, 80);
+	gtk_widget_set_size_request(row0, 180, 45);
+	gtk_widget_set_size_request(row1, 180,80);
+	gtk_widget_set_size_request(row2, 180, 80);
+	gtk_widget_set_size_request(row3, 180, 80);
+	gtk_widget_set_size_request(row4, 180, 80);
 
 	gtk_widget_set_hexpand(row0, TRUE);
 	gtk_widget_set_hexpand(row1, TRUE);
@@ -203,7 +225,8 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	gtk_grid_attach(GTK_GRID(keyboard), row4, 0,4,1,1);
 
 
-	gtk_box_pack_end(GTK_BOX(box_main),keyboard, FALSE, FALSE, 20);
+	gtk_box_pack_start(GTK_BOX(box_main), box_top_bar, FALSE, FALSE, 0);
+	gtk_box_pack_end(GTK_BOX(box_main),keyboard, FALSE, FALSE, 0);
 	
 		
 	return box_main;

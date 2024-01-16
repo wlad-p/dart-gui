@@ -1,0 +1,14 @@
+.page_start{
+	background-color: #fcfde1;
+}
+
+.page_start > button {
+	margin: 60px;
+	border-radius: 20px;
+	background-color: green;
+}
+
+.page_start > * {
+	font-size: 50px;
+}
+

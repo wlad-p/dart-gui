@@ -28,20 +28,34 @@ static void open_page_new_player(GtkWidget* widget, gpointer data){
 
 }
 
-static void delete_player(GtkWidget* widget, gpointer data){
+static void open_page_start(GtkWidget* widget, gpointer data){
 
-//	g_print("delete player button\n");
+	GtkStack *stack = GTK_STACK(data);
+	gtk_stack_set_visible_child_name(stack, "page_start");
 
-	const char *player_id_string = (char *)data;
-//	g_print("data: %s", player_id_string);
+}
 
-	//reload_menu();
+
+void delete_player(GtkWidget* widget, gpointer data){
+
+	char *player_id_string = (char *)data;
+	int player_id = atoi(player_id_string);
+	g_print("MENU ID: %d", player_id);
+	remove_player(player_id);
+	reload_menu();
 }
 
 void reload_menu(){
 
 	gtk_widget_destroy(box_players_overview);
 	box_players_overview = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
+
+	gtk_widget_set_size_request(box_players_overview, 100, 500);
+	gtk_widget_set_vexpand(box_players_overview, TRUE);
+
+	GtkStyleContext *box_players_overview_context = gtk_widget_get_style_context(box_players_overview);
+	gtk_style_context_add_class(box_players_overview_context, "box_players_overview");
+
 
 	for (int i=0;i<game.num_players;i++){
 
@@ -51,18 +65,11 @@ void reload_menu(){
 		GtkWidget *btn_delete_player = gtk_button_new_with_label("delete");
 		char *player_id = (char *)malloc(sizeof(char) * 2);
 		sprintf(player_id, "%d", i);
-
-	//	g_print("reload func, i: %d\n", i);
-	//	g_print("reload func, player_id: %s\n", player_id);
-		
 		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),player_id);
 
 		gtk_box_pack_start(GTK_BOX(box_player),name, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_player),btn_delete_player, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_players_overview),box_player, FALSE, FALSE, 0);
-
-		free(player_id);
-		
 	}
 
 	gtk_box_pack_start(GTK_BOX(box),box_players_overview, FALSE, FALSE, 50);
@@ -72,20 +79,51 @@ void reload_menu(){
 GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
 
 	init();
+	
 
 	box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+
+	GtkStyleContext *menu_context = gtk_widget_get_style_context(box);
+	gtk_style_context_add_class(menu_context, "page_menu");
+
+	GtkWidget *box_top_bar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	GtkWidget *btn_back = gtk_button_new_with_label("<");
+	g_signal_connect(btn_back, "clicked", G_CALLBACK(open_page_start),stack);
+
+	GtkWidget *label_title = gtk_label_new("Darts");
+
+	GtkStyleContext *box_top_bar_context = gtk_widget_get_style_context(box_top_bar);
+	gtk_style_context_add_class(box_top_bar_context, "box_top_bar");
+
+	gtk_box_pack_start(GTK_BOX(box_top_bar),btn_back, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box_top_bar),label_title, FALSE, FALSE, 0);
 
 	GtkWidget* label = gtk_label_new("Select Player");
 
 	GtkWidget* btn_add_player = gtk_button_new_with_label("Add Player");
 	g_signal_connect(btn_add_player, "clicked", G_CALLBACK(open_page_new_player),stack);
+	GtkStyleContext *btn_add_player_context = gtk_widget_get_style_context(btn_add_player);
+	gtk_style_context_add_class(btn_add_player_context, "btn_add_player");
+
 	GtkWidget* btn_start_game = gtk_button_new_with_label("Start Game");
 	g_signal_connect(btn_start_game, "clicked", G_CALLBACK(start_game),stack);
+	GtkStyleContext *btn_start_game_context = gtk_widget_get_style_context(btn_start_game);
+	gtk_style_context_add_class(btn_start_game_context, "btn_start_game");
 
 	
+	gtk_box_pack_start(GTK_BOX(box), box_top_bar, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box),label, FALSE, FALSE, 50);
-	gtk_box_pack_start(GTK_BOX(box), btn_add_player, FALSE, FALSE, 50);
-	gtk_box_pack_start(GTK_BOX(box), btn_start_game, FALSE, FALSE, 50);
+	gtk_box_pack_end(GTK_BOX(box), btn_start_game, FALSE, FALSE, 50);
+	gtk_box_pack_end(GTK_BOX(box), btn_add_player, FALSE, FALSE, 0);
+
+	box_players_overview = gtk_box_new(GTK_ORIENTATION_VERTICAL,10);
+	gtk_widget_set_size_request(box_players_overview, 100, 500);
+	gtk_widget_set_vexpand(box_players_overview, TRUE);
+
+	GtkStyleContext *box_players_overview_context = gtk_widget_get_style_context(box_players_overview);
+	gtk_style_context_add_class(box_players_overview_context, "box_players_overview");
+	gtk_box_pack_start(GTK_BOX(box),box_players_overview, FALSE, FALSE, 50);
+
 
 	return box;
 }

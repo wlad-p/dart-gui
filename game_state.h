@@ -16,6 +16,7 @@ void print_current_player();
 void init();
 void add_player(const char *name);
 void next_player();
+void remove_player(int player_id);
 void revert();
 void submit_points(int points);
 

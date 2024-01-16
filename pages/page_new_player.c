@@ -55,6 +55,9 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 
 	GtkWidget* main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 
+	GtkStyleContext *new_player_context = gtk_widget_get_style_context(main_box);
+	gtk_style_context_add_class(new_player_context, "page_new_player");
+
 
 	GtkWidget *label = gtk_label_new("Add a new player");
 	GtkWidget *photo = gtk_image_new_from_file("images/example.jpeg");
