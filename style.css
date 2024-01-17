@@ -3,3 +3,7 @@
 @import "stylesheets/page_new_player.css";
 @import "stylesheets/page_select_player.css";
 @import "stylesheets/page_game.css";
+
+*{
+    font-family: system-ui;
+}

@@ -1,9 +1,18 @@
 .page_select_player{
-	background-color: #fcfde1;
+	background-color: #fffff2;
 }
 
 .box_top_bar{
 	background-color: green;
+}
+
+.btn_new_player{
+	font-size: 18px;
+	background-color: white;
+	padding: 18px;
+	margin: 0 60px 80px 60px;
+	border-radius: 20px;
+	border: 1px solid black;
 }
 
 .box_top_bar > button{

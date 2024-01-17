@@ -40,7 +40,7 @@ GtkWidget *create_page_select_player(GtkWidget *window, GtkWidget *stack) {
     GtkWidget *box_main = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
 
     GtkStyleContext *select_player_context = gtk_widget_get_style_context(box_main);
-	gtk_style_context_add_class(select_player_context, "select_player");
+	gtk_style_context_add_class(select_player_context, "page_select_player");
 
 	GtkWidget *box_top_bar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	GtkWidget *btn_back = gtk_button_new_with_label("<");
@@ -88,6 +88,8 @@ GtkWidget *create_page_select_player(GtkWidget *window, GtkWidget *stack) {
     }
 
     GtkWidget *btn_new_player = gtk_button_new_with_label("Create new Player");
+    GtkStyleContext *btn_new_player_context = gtk_widget_get_style_context(btn_new_player);
+	gtk_style_context_add_class(btn_new_player_context, "btn_new_player");
     g_signal_connect(btn_new_player, "clicked", G_CALLBACK(open_page_new_player),stack);
     gtk_box_pack_end(GTK_BOX(box_main),btn_new_player, FALSE, FALSE, 20);
 

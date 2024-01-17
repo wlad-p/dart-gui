@@ -60,15 +60,25 @@ void reload_menu(){
 	for (int i=0;i<game.num_players;i++){
 
 		GtkWidget *box_player = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+		GtkStyleContext *box_player_context = gtk_widget_get_style_context(box_player);
+		gtk_style_context_add_class(box_player_context, "box_player");
+
+		/*
+		char image_file[100] = "images/";
+        strcat(image_file, game.player_names[i]);
+        strcat(image_file, ".jpg"); */
+        GtkWidget *photo = gtk_image_new_from_file("images/Wlad.jpg");
+
 		GtkWidget *name = gtk_label_new(game.player_names[i]);
 		
-		GtkWidget *btn_delete_player = gtk_button_new_with_label("delete");
+		GtkWidget *btn_delete_player = gtk_button_new_with_label("X");
 		char *player_id = (char *)malloc(sizeof(char) * 2);
 		sprintf(player_id, "%d", i);
 		g_signal_connect(btn_delete_player, "clicked", G_CALLBACK(delete_player),player_id);
 
-		gtk_box_pack_start(GTK_BOX(box_player),name, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(box_player),btn_delete_player, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_player),photo, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_player),name, FALSE, FALSE, 10);
+		gtk_box_pack_end(GTK_BOX(box_player),btn_delete_player, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_players_overview),box_player, FALSE, FALSE, 0);
 	}
 
@@ -98,7 +108,7 @@ GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
 	gtk_box_pack_start(GTK_BOX(box_top_bar),btn_back, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box_top_bar),label_title, FALSE, FALSE, 0);
 
-	GtkWidget* label = gtk_label_new("Select Player");
+	GtkWidget* label = gtk_label_new("Select Players");
 
 	GtkWidget* btn_add_player = gtk_button_new_with_label("Add Player");
 	g_signal_connect(btn_add_player, "clicked", G_CALLBACK(open_page_select_player),stack);

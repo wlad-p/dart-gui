@@ -60,7 +60,7 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 
 
 	GtkWidget *label = gtk_label_new("Add a new player");
-	GtkWidget *photo = gtk_image_new_from_file("images/example.jpeg");
+	GtkWidget *photo = gtk_image_new_from_file("images/default.jpg");
 
 	//Buttons
 	GtkWidget *buttons = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
@@ -219,6 +219,9 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 
 	GtkWidget *keyboard = gtk_grid_new();
 
+	GtkStyleContext *keyboard_context = gtk_widget_get_style_context(keyboard);
+	gtk_style_context_add_class(keyboard_context, "keyboard");
+
 	gtk_grid_attach(GTK_GRID(keyboard), row1, 0,0,1,1);
 	gtk_grid_attach(GTK_GRID(keyboard), row2, 0,1,1,1);	
 	gtk_grid_attach(GTK_GRID(keyboard), row3, 0,2,1,1);
@@ -231,7 +234,7 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	gtk_box_pack_start(GTK_BOX(main_box),photo, TRUE, TRUE, 50);	
 	gtk_box_pack_start(GTK_BOX(main_box),player_name, TRUE, TRUE, 50);	
 	gtk_box_pack_start(GTK_BOX(main_box),buttons, TRUE, TRUE, 50);
-	gtk_box_pack_start(GTK_BOX(main_box),keyboard, TRUE, TRUE, 50);
+	gtk_box_pack_end(GTK_BOX(main_box),keyboard, TRUE, TRUE, 0);
 	
 		
 	return main_box;

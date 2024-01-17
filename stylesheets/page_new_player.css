@@ -1,4 +1,8 @@
 .page_new_player{
-	background-color: #fcfde1;
+	background-color: #fffff2;
+}
+
+.keyboard > button{
+	background-color: white;
 }
 

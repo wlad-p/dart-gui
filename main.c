@@ -11,7 +11,7 @@ int main(int argc, char **argv){
 	GtkWidget *window;
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	
-	gtk_window_set_default_size(GTK_WINDOW(window), 50,50);
+	gtk_window_set_default_size(GTK_WINDOW(window), 200,250);
 	gtk_window_fullscreen(GTK_WINDOW(window));
 	
 	//Stack
