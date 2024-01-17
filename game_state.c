@@ -33,33 +33,6 @@ void previous_player(){
 	game.current_player = (game.current_player - 1) % game.num_players;
 }
 
-/*
-void remove_player(int player_id){
-	if(game.num_players == 1){
-
-		*game.player_names[player_id] = '\0';
-	}
-	else if(game.num_players > 1){
-		bool last_player = false;
-		int counter = 0;
-
-		while(!last_player && (counter + player_id) < 4){
-			if(*game.player_names[player_id + counter + 1] != '\0'){
-				strcpy(game.player_names[player_id + counter], game.player_names[player_id + counter + 1]);
-				*game.player_names[player_id + counter + 1] = '\0';
-
-				counter++;
-			}
-			else {
-				last_player = true;
-			}
-		}
-	}
-
-	game.num_players--;
-	
-} */
-
 void remove_player(int player_id){
 
 	g_print("PLAYER state ID: %d \n", player_id);

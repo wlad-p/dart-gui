@@ -17,10 +17,10 @@ static void start_game(GtkWidget *widget, gpointer data) {
     gtk_stack_set_visible_child_name(stack, "page_game");
 }
 
-static void open_page_new_player(GtkWidget* widget, gpointer data){
+static void open_page_select_player(GtkWidget* widget, gpointer data){
 	if(game.num_players < 4){
 		GtkStack *stack = GTK_STACK(data);
-    	gtk_stack_set_visible_child_name(stack, "page_new_player");
+    	gtk_stack_set_visible_child_name(stack, "page_select_player");
 	}
 	else{
 	//	g_print("More than 4 Players");
@@ -101,7 +101,7 @@ GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* label = gtk_label_new("Select Player");
 
 	GtkWidget* btn_add_player = gtk_button_new_with_label("Add Player");
-	g_signal_connect(btn_add_player, "clicked", G_CALLBACK(open_page_new_player),stack);
+	g_signal_connect(btn_add_player, "clicked", G_CALLBACK(open_page_select_player),stack);
 	GtkStyleContext *btn_add_player_context = gtk_widget_get_style_context(btn_add_player);
 	gtk_style_context_add_class(btn_add_player_context, "btn_add_player");
 

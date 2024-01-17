@@ -3,6 +3,7 @@
 #include "pages/page_menu.h"
 #include "pages/page_new_player.h"
 #include "pages/page_game.h"
+#include "pages/page_select_player.h"
 
 int main(int argc, char **argv){
 
@@ -24,6 +25,8 @@ int main(int argc, char **argv){
 	gtk_stack_add_named(GTK_STACK(stack), page_menu, "page_menu");
 	GtkWidget* page_new_player = create_page_new_player(window, stack);
 	gtk_stack_add_named(GTK_STACK(stack), page_new_player, "page_new_player");
+	GtkWidget* page_select_player = create_page_select_player(window, stack);
+	gtk_stack_add_named(GTK_STACK(stack), page_select_player, "page_select_player");
 	GtkWidget *page_game = create_page_game(window, stack);
 	gtk_stack_add_named(GTK_STACK(stack), page_game, "page_game");
 

@@ -1,5 +1,5 @@
 PROG = main
-PAGES = game_state.c pages/page_game.c pages/page_start.c pages/page_menu.c pages/page_new_player.c 
+PAGES = game_state.c pages/page_game.c pages/page_start.c pages/page_menu.c pages/page_select_player.c pages/page_new_player.c 
 
 CC = gcc
 CFLAGS = `pkg-config --cflags gtk+-3.0`
