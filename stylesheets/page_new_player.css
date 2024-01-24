@@ -6,3 +6,18 @@
 	background-color: white;
 }
 
+
+.box_top_bar > button{
+	background-color: green;
+	border: 0.5px solid black;
+	color: red;
+}
+
+.box_top_bar > label{
+	margin-left: 100px;
+}
+
+.box_top_bar{
+	background-color: green;
+}
+

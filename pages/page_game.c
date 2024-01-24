@@ -36,6 +36,10 @@ void reload_game(){
 	for (int i=0;i<game.num_players;i++){
 
 		GtkWidget *box_score_card = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+		GtkStyleContext *box_score_card_context = gtk_widget_get_style_context(box_score_card);
+		gtk_style_context_add_class(box_score_card_context, "box_score_card");
+		gtk_widget_set_size_request(GTK_WIDGET(box_score_card), 100, 150);
+
 		GtkWidget *label_name = gtk_label_new(game.player_names[i]);
 
 		//points to string
@@ -44,11 +48,25 @@ void reload_game(){
 		snprintf(points_as_string, len+1, "%d", game.scores[i]);
 		
 		GtkWidget *label_points = gtk_label_new(points_as_string);
-		GtkWidget *photo = gtk_image_new_from_file("images/example.jpg");
-		gtk_widget_set_size_request(photo, 50,50);
+
+		char image_file[100] = "images/";
+        strcat(image_file, game.player_names[i]);
+        strcat(image_file, ".jpg");
+
+		GtkWidget *photo;
+
+		if (access(image_file, F_OK) == 0) {
+			photo = gtk_image_new_from_file(image_file);
+		} else {
+			photo = gtk_image_new_from_file("images/default.jpg");
+		}
+
+		GtkWidget *player_container = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+		gtk_box_pack_start(GTK_BOX(player_container), photo, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(player_container), label_name, FALSE, FALSE, 10);
 		
-		gtk_box_pack_start(GTK_BOX(box_score_card),photo, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(box_score_card),label_name, FALSE, FALSE, 0);
+		
+		gtk_box_pack_start(GTK_BOX(box_score_card),player_container, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_points, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_cards_overview),box_score_card, FALSE, FALSE, 0);
 
@@ -57,7 +75,7 @@ void reload_game(){
 		
 	}
 
-	gtk_box_pack_start(GTK_BOX(box_main),box_score_cards_overview, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(box_main),box_score_cards_overview, TRUE, TRUE, 50);
 	gtk_widget_show_all(box_main);
 }
 
@@ -203,11 +221,11 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	g_signal_connect(btn_enter, "clicked", G_CALLBACK(press_enter), NULL);
 	gtk_box_pack_start(GTK_BOX(row4), btn_enter, TRUE, TRUE, 0);
 
-	gtk_widget_set_size_request(row0, 180, 45);
-	gtk_widget_set_size_request(row1, 180,80);
-	gtk_widget_set_size_request(row2, 180, 80);
-	gtk_widget_set_size_request(row3, 180, 80);
-	gtk_widget_set_size_request(row4, 180, 80);
+	gtk_widget_set_size_request(row0, 180, 55);
+	gtk_widget_set_size_request(row1, 180,100);
+	gtk_widget_set_size_request(row2, 180, 100);
+	gtk_widget_set_size_request(row3, 180, 100);
+	gtk_widget_set_size_request(row4, 180, 100);
 
 	gtk_widget_set_hexpand(row0, TRUE);
 	gtk_widget_set_hexpand(row1, TRUE);
@@ -226,7 +244,9 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
 
 	gtk_box_pack_start(GTK_BOX(box_main), box_top_bar, FALSE, FALSE, 0);
-	gtk_box_pack_end(GTK_BOX(box_main),keyboard, FALSE, FALSE, 0);
+	gtk_box_pack_end(GTK_BOX(box_main),keyboard, TRUE, TRUE, 0);
+
+	gtk_widget_set_vexpand(box_main, TRUE);
 	
 		
 	return box_main;

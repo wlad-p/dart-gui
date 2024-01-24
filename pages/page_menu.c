@@ -5,6 +5,7 @@
 #include "../game_state.h"
 #include "page_game.h"
 #include <stdlib.h>
+#include "unistd.h"
 
 GtkWidget *box;
 static GtkWidget *box_players_overview;
@@ -63,11 +64,18 @@ void reload_menu(){
 		GtkStyleContext *box_player_context = gtk_widget_get_style_context(box_player);
 		gtk_style_context_add_class(box_player_context, "box_player");
 
-		/*
+		
 		char image_file[100] = "images/";
         strcat(image_file, game.player_names[i]);
-        strcat(image_file, ".jpg"); */
-        GtkWidget *photo = gtk_image_new_from_file("images/Wlad.jpg");
+        strcat(image_file, ".jpg");
+
+		GtkWidget *photo;
+
+		if (access(image_file, F_OK) == 0) {
+			photo = gtk_image_new_from_file(image_file);
+		} else {
+			photo = gtk_image_new_from_file("images/default.jpg");
+		}
 
 		GtkWidget *name = gtk_label_new(game.player_names[i]);
 		

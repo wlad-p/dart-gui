@@ -22,6 +22,13 @@ static void press_key(GtkWidget* widget, gpointer data){
 	free(new_text);
 }
 
+static void open_page_menu(GtkWidget* widget, gpointer data){
+
+	GtkStack *stack = GTK_STACK(data);
+	gtk_stack_set_visible_child_name(stack, "page_menu");
+
+}
+
 static void delete_character(GtkWidget *widget, gpointer data){
 	const char *text = gtk_entry_get_text(GTK_ENTRY(player_name));
 	int len = strlen(text);
@@ -57,6 +64,19 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 
 	GtkStyleContext *new_player_context = gtk_widget_get_style_context(main_box);
 	gtk_style_context_add_class(new_player_context, "page_new_player");
+
+	GtkWidget *box_top_bar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	GtkWidget *btn_back = gtk_button_new_with_label("<");
+	g_signal_connect(btn_back, "clicked", G_CALLBACK(open_page_menu),stack);
+
+	GtkWidget *label_title = gtk_label_new("Darts");
+
+	GtkStyleContext *box_top_bar_context = gtk_widget_get_style_context(box_top_bar);
+	gtk_style_context_add_class(box_top_bar_context, "box_top_bar");
+
+	gtk_box_pack_start(GTK_BOX(box_top_bar),btn_back, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box_top_bar),label_title, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(main_box),box_top_bar, FALSE, FALSE, 0);
 
 
 	GtkWidget *label = gtk_label_new("Add a new player");
