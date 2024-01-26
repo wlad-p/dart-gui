@@ -36,8 +36,16 @@ void reload_game(){
 	for (int i=0;i<game.num_players;i++){
 
 		GtkWidget *box_score_card = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
-		GtkStyleContext *box_score_card_context = gtk_widget_get_style_context(box_score_card);
-		gtk_style_context_add_class(box_score_card_context, "box_score_card");
+		
+		if(i==game.current_player){
+			GtkStyleContext *box_score_card_current_context = gtk_widget_get_style_context(box_score_card);
+			gtk_style_context_add_class(box_score_card_current_context, "box_score_card_current");
+		}
+		else{
+			GtkStyleContext *box_score_card_context = gtk_widget_get_style_context(box_score_card);
+			gtk_style_context_add_class(box_score_card_context, "box_score_card");
+		}
+
 		gtk_widget_set_size_request(GTK_WIDGET(box_score_card), 100, 150);
 
 		GtkWidget *label_name = gtk_label_new(game.player_names[i]);
@@ -51,14 +59,14 @@ void reload_game(){
 
 		char image_file[100] = "images/";
         strcat(image_file, game.player_names[i]);
-        strcat(image_file, ".jpg");
+        strcat(image_file, ".png");
 
 		GtkWidget *photo;
 
 		if (access(image_file, F_OK) == 0) {
 			photo = gtk_image_new_from_file(image_file);
 		} else {
-			photo = gtk_image_new_from_file("images/default.jpg");
+			photo = gtk_image_new_from_file("images/default.png");
 		}
 
 		GtkWidget *player_container = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -75,7 +83,8 @@ void reload_game(){
 		
 	}
 
-	gtk_box_pack_start(GTK_BOX(box_main),box_score_cards_overview, TRUE, TRUE, 50);
+	gtk_box_pack_start(GTK_BOX(box_main),box_score_cards_overview, FALSE, FALSE, 10);
+	
 	gtk_widget_show_all(box_main);
 }
 
@@ -140,6 +149,7 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	// ########### Keyboard ###################
 
 	entry_score = gtk_entry_new();
+	gtk_entry_set_alignment(GTK_ENTRY(entry_score), 0.5);
 	
 	GtkWidget* row0 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
@@ -244,7 +254,7 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
 
 	gtk_box_pack_start(GTK_BOX(box_main), box_top_bar, FALSE, FALSE, 0);
-	gtk_box_pack_end(GTK_BOX(box_main),keyboard, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(box_main),keyboard, FALSE, FALSE, 0);
 
 	gtk_widget_set_vexpand(box_main, TRUE);
 	

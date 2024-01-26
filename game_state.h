@@ -4,9 +4,9 @@
 
 typedef struct node {
 	int num_players;
-	char player_names[4][30];
-	int scores[4];
-	int throws[4][100];
+	char player_names[3][30];
+	int scores[3];
+	int throws[3][100];
 	int current_player;
 } GameState;
 

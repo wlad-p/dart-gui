@@ -19,7 +19,7 @@ static void start_game(GtkWidget *widget, gpointer data) {
 }
 
 static void open_page_select_player(GtkWidget* widget, gpointer data){
-	if(game.num_players < 4){
+	if(game.num_players < 3){
 		GtkStack *stack = GTK_STACK(data);
     	gtk_stack_set_visible_child_name(stack, "page_select_player");
 	}
@@ -67,14 +67,14 @@ void reload_menu(){
 		
 		char image_file[100] = "images/";
         strcat(image_file, game.player_names[i]);
-        strcat(image_file, ".jpg");
+        strcat(image_file, ".png");
 
 		GtkWidget *photo;
 
 		if (access(image_file, F_OK) == 0) {
 			photo = gtk_image_new_from_file(image_file);
 		} else {
-			photo = gtk_image_new_from_file("images/default.jpg");
+			photo = gtk_image_new_from_file("images/default.png");
 		}
 
 		GtkWidget *name = gtk_label_new(game.player_names[i]);

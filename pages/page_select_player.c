@@ -67,7 +67,7 @@ GtkWidget *create_page_select_player(GtkWidget *window, GtkWidget *stack) {
 
         char image_file[100] = "images/";
         strcat(image_file, name);
-        strcat(image_file, ".jpg"); 
+        strcat(image_file, ".png"); 
         GtkWidget *photo = gtk_image_new_from_file(image_file);
         
         GtkWidget *label_name = gtk_label_new(name);
@@ -81,7 +81,7 @@ GtkWidget *create_page_select_player(GtkWidget *window, GtkWidget *stack) {
 
         gtk_box_pack_start(GTK_BOX(box_player_card),photo, FALSE, FALSE, 20);
         gtk_box_pack_start(GTK_BOX(box_player_card),label_name, FALSE, FALSE, 20);
-        gtk_box_pack_start(GTK_BOX(box_player_card),btn_select, FALSE, FALSE, 20);
+        gtk_box_pack_end(GTK_BOX(box_player_card),btn_select, FALSE, FALSE, 20);
 
         gtk_box_pack_start(GTK_BOX(box_main), box_player_card, FALSE, FALSE, 20);
             

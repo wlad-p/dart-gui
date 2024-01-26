@@ -8,11 +8,16 @@ GameState game;
 void init(){
 
 	for(int i = 0; i < 100; i++){
-		for(int j = 0; j < 4; j++){
+		for(int j = 0; j < 3; j++){
 			game.throws[j][i] = -1;
 		}
 	}
 	
+}
+
+int modulo(int a, int b){
+	int result = a % b;
+	return result < 0 ? result + b : result;
 }
 
 void print_current_player(){
@@ -26,11 +31,12 @@ void add_player(const char *name){
 }
 
 void next_player(){
-	game.current_player =(game.current_player + 1) % game.num_players;
+	game.current_player = modulo(game.current_player + 1, game.num_players);
 }
 
 void previous_player(){
-	game.current_player = (game.current_player - 1) % game.num_players;
+	game.current_player = modulo(game.current_player - 1, game.num_players);
+	
 }
 
 void remove_player(int player_id){
@@ -65,13 +71,16 @@ void submit_points(int points){
 }
 
 void revert(){
+	if(game.throws[0][0] == -1){
+		return; 
+	}
 	previous_player();
 
 	int last_value;
 	for(int i = 0; i < 100; i++){
 		if(game.throws[game.current_player][i] == -1 && i>0 ){
 			last_value = game.throws[game.current_player][i-1];
-			game.throws[game.current_player][i-1] == -1;
+			game.throws[game.current_player][i-1] = -1;
 			break;
 		}
 	}
