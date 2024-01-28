@@ -12,6 +12,12 @@ void init(){
 			game.throws[j][i] = -1;
 		}
 	}
+
+	for(int i=0; i < 3; i++){
+		game.scores[i] = 501;
+	}
+
+	game.current_player = 0;
 	
 }
 
@@ -60,6 +66,10 @@ void remove_player(int player_id){
 void submit_points(int points){
 	game.scores[game.current_player] -= points;
 
+	if(game.scores[game.current_player] <= 0){
+		init();
+	}
+
 	for(int i=0; i < 100; i++){
 		if(game.throws[game.current_player][i] == -1){
 			game.throws[game.current_player][i] = points;
@@ -87,4 +97,26 @@ void revert(){
 
 	game.scores[game.current_player] += last_value;
 	
+}
+
+char* get_last_value(int player){
+
+	int last_value = 0;
+	for(int i=1; i<100; i++){
+		if(game.throws[player][i] == -1){
+			last_value = game.throws[player][i-1];
+			break;
+		}
+	}
+
+	if(last_value == -1){
+		return "";
+	}
+
+	int len = snprintf(NULL, 0, "%d", last_value);
+	char *points_as_string = malloc(len + 1);
+	snprintf(points_as_string, len+1, "%d", last_value);
+
+	return points_as_string;
+
 }

@@ -13,6 +13,7 @@ static GtkWidget *box_players_overview;
 
 static void start_game(GtkWidget *widget, gpointer data) {
 
+	init();
 	reload_game();
     GtkStack *stack = GTK_STACK(data);
     gtk_stack_set_visible_child_name(stack, "page_game");

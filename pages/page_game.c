@@ -5,6 +5,7 @@
 GtkWidget *entry_score;
 GtkWidget *box_score_cards_overview;
 GtkWidget *box_main;
+GtkWidget *label_last_score;
 
 static void press_key(GtkWidget* widget, gpointer data){
 
@@ -56,6 +57,8 @@ void reload_game(){
 		snprintf(points_as_string, len+1, "%d", game.scores[i]);
 		
 		GtkWidget *label_points = gtk_label_new(points_as_string);
+		GtkStyleContext *label_points_context = gtk_widget_get_style_context(label_points);
+		gtk_style_context_add_class(label_points_context, "label_points");
 
 		char image_file[100] = "images/";
         strcat(image_file, game.player_names[i]);
@@ -71,11 +74,22 @@ void reload_game(){
 
 		GtkWidget *player_container = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 		gtk_box_pack_start(GTK_BOX(player_container), photo, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(player_container), label_name, FALSE, FALSE, 10);
-		
+		gtk_box_pack_end(GTK_BOX(player_container), label_name, FALSE, FALSE, 10);
+		GtkStyleContext *player_container_context = gtk_widget_get_style_context(player_container);
+		gtk_style_context_add_class(player_container_context, "player_container");
+
+		GtkWidget *last_score_container = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+		GtkWidget *label_last_text = gtk_label_new("last:");
+		char* last_score = get_last_value(i);
+		label_last_score = gtk_label_new(last_score);
+		gtk_box_pack_start(GTK_BOX(last_score_container), label_last_text, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(last_score_container), label_last_score, FALSE, FALSE, 0);
+		GtkStyleContext *last_score_container_context = gtk_widget_get_style_context(last_score_container);
+		gtk_style_context_add_class(last_score_container_context, "last_score_container");
 		
 		gtk_box_pack_start(GTK_BOX(box_score_card),player_container, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_card),label_points, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box_score_card),last_score_container, FALSE, FALSE, 0);
 		gtk_box_pack_start(GTK_BOX(box_score_cards_overview),box_score_card, FALSE, FALSE, 0);
 
 		gtk_box_set_homogeneous(GTK_BOX(box_score_card), TRUE);
@@ -149,7 +163,6 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	// ########### Keyboard ###################
 
 	entry_score = gtk_entry_new();
-	gtk_entry_set_alignment(GTK_ENTRY(entry_score), 0.5);
 	
 	GtkWidget* row0 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);

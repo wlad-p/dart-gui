@@ -19,6 +19,7 @@ void next_player();
 void remove_player(int player_id);
 void revert();
 void submit_points(int points);
+char* get_last_value(int player);
 
 
 #endif 

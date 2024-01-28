@@ -14,10 +14,12 @@ GtkWidget *create_page_start(GtkWidget *window, GtkWidget *stack){
 	GtkStyleContext *start_context = gtk_widget_get_style_context(grid);
 	gtk_style_context_add_class(start_context, "page_start");
 
-	GtkWidget *label1 = gtk_label_new("Wlarts");
-	GtkWidget *label2 = gtk_label_new(" ");
+	GtkWidget *label1 = gtk_label_new("Darts");
+	GtkWidget *img_dartboard = gtk_image_new_from_file("images/dartboard.png");
+	gtk_widget_set_size_request(img_dartboard, 100, 100);
 	gtk_grid_attach(GTK_GRID(grid), label1, 0,0,1,1);
-	gtk_grid_attach(GTK_GRID(grid), label2, 0,1,1,1);	
+	gtk_grid_attach(GTK_GRID(grid), img_dartboard, 0,1,1,1);
+	
 
 	//Button
 	GtkWidget *btn = gtk_button_new_with_label("Start");
