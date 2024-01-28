@@ -135,7 +135,9 @@ static void press_revert(GtkWidget *widget, gpointer data){
 }
 
 static void press_no_score(GtkWidget *widget, gpointer data){
-	next_player();
+	submit_points(0);
+	gtk_entry_set_text(GTK_ENTRY(entry_score), "");
+	reload_game();
 }
 
 
@@ -170,6 +172,15 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* row3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 
+	GtkStyleContext *row1_context = gtk_widget_get_style_context(row1);
+	gtk_style_context_add_class(row1_context, "row1");
+	GtkStyleContext *row2_context = gtk_widget_get_style_context(row2);
+	gtk_style_context_add_class(row2_context, "row2");
+	GtkStyleContext *row3_context = gtk_widget_get_style_context(row3);
+	gtk_style_context_add_class(row3_context, "row3");
+	GtkStyleContext *row4_context = gtk_widget_get_style_context(row4);
+	gtk_style_context_add_class(row4_context, "row4");
+
 
 	gtk_box_set_homogeneous(GTK_BOX(row0), FALSE);
 	gtk_box_set_homogeneous(GTK_BOX(row1), TRUE);
@@ -181,13 +192,19 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 	GtkWidget* btn_revert = gtk_button_new_with_label("<-");
 	g_signal_connect(btn_revert, "clicked", G_CALLBACK(press_revert), NULL);
 	gtk_box_pack_start(GTK_BOX(row0), btn_revert, TRUE, TRUE, 0);
+	GtkStyleContext *btn_revert_context = gtk_widget_get_style_context(btn_revert);
+	gtk_style_context_add_class(btn_revert_context, "btn_revert");
 
 	entry_score = gtk_entry_new();
+	gtk_entry_set_alignment(GTK_ENTRY(entry_score), 0.5);
 	gtk_box_pack_start(GTK_BOX(row0), entry_score, TRUE, TRUE, 0);
+	GtkStyleContext *entry_score_context = gtk_widget_get_style_context(entry_score);
+	gtk_style_context_add_class(entry_score_context, "entry_score");
 
 	GtkWidget* btn_delete = gtk_button_new_with_label("<x|");
 	g_signal_connect(btn_delete, "clicked", G_CALLBACK(press_delete), NULL);
 	gtk_box_pack_start(GTK_BOX(row0), btn_delete, TRUE, TRUE, 0);
+	
 
 	// Row 1
 	GtkWidget* btn_one = gtk_button_new_with_label("1");
@@ -233,12 +250,14 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
 	//Row4
 	GtkWidget* btn_no_score = gtk_button_new_with_label("X");
-	g_signal_connect(btn_no_score, "clicked", G_CALLBACK(press_no_score), NULL);
+	g_signal_connect(btn_no_score, "clicked", G_CALLBACK(press_no_score), "NULL");
 	gtk_box_pack_start(GTK_BOX(row4), btn_no_score, TRUE, TRUE, 0);
 
 	GtkWidget* btn_zero = gtk_button_new_with_label("0");
 	g_signal_connect(btn_zero, "clicked", G_CALLBACK(press_key), "0");
 	gtk_box_pack_start(GTK_BOX(row4), btn_zero, TRUE, TRUE, 0);
+	GtkStyleContext *btn_zero_context = gtk_widget_get_style_context(btn_zero);
+	gtk_style_context_add_class(btn_zero_context, "btn_zero");
 
 	GtkWidget* btn_enter = gtk_button_new_with_label("OK");
 	g_signal_connect(btn_enter, "clicked", G_CALLBACK(press_enter), NULL);
@@ -258,6 +277,8 @@ GtkWidget *create_page_game(GtkWidget *window, GtkWidget *stack) {
 
 
 	GtkWidget *keyboard = gtk_grid_new();
+
+
 	
 	gtk_grid_attach(GTK_GRID(keyboard), row0, 0,0,1,1);	
 	gtk_grid_attach(GTK_GRID(keyboard), row1, 0,1,1,1);

@@ -117,7 +117,9 @@ GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
 	gtk_box_pack_start(GTK_BOX(box_top_bar),btn_back, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(box_top_bar),label_title, FALSE, FALSE, 0);
 
-	GtkWidget* label = gtk_label_new("Select Players");
+	GtkWidget* label_select_player = gtk_label_new("Select Players");
+	GtkStyleContext *label_select_player_context = gtk_widget_get_style_context(label_select_player);
+	gtk_style_context_add_class(label_select_player_context, "label_select_player");
 
 	GtkWidget* btn_add_player = gtk_button_new_with_label("Add Player");
 	g_signal_connect(btn_add_player, "clicked", G_CALLBACK(open_page_select_player),stack);
@@ -131,7 +133,7 @@ GtkWidget *create_page_menu(GtkWidget *window, GtkWidget *stack) {
 
 	
 	gtk_box_pack_start(GTK_BOX(box), box_top_bar, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(box),label, FALSE, FALSE, 50);
+	gtk_box_pack_start(GTK_BOX(box),label_select_player, FALSE, FALSE, 50);
 	gtk_box_pack_end(GTK_BOX(box), btn_start_game, FALSE, FALSE, 50);
 	gtk_box_pack_end(GTK_BOX(box), btn_add_player, FALSE, FALSE, 0);
 

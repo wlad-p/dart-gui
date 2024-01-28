@@ -97,6 +97,7 @@ GtkWidget *create_page_new_player(GtkWidget *window, GtkWidget *stack) {
 	// ########### Keyboard ###################
 
 	player_name = gtk_entry_new();
+	gtk_entry_set_alignment(GTK_ENTRY(player_name), 0.5);
 	GtkWidget* row1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
 	GtkWidget* row3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);

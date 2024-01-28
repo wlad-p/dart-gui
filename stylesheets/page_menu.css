@@ -2,9 +2,6 @@
 	background-color: #fffff2;
 }
 
-.page_menu > * {
-	font-size: 40px;
-}
 
 .btn_add_player{
 	font-size: 18px;
@@ -15,33 +12,25 @@
 	border: 1px solid black;
 }
 
+.label_select_player{
+	font-size: 30px;
+}
+
 .box_player{
 	margin-top: 20px;
 	padding: 20px;
 	background-color: #c2e9cd;
 	border-radius: 20px;
+	border: 2px solid black
 }
 
 .box_player > button {
 	background-color: white;
 	margin: 15px 0 15px 5px;
 	border-radius: 8px;
-	border: 2px solid red;
+	border: 1px solid red;
 }
 
-.box_top_bar{
-	background-color: green;
-}
-
-.box_top_bar > button{
-	background-color: green;
-	border: none;
-	color: red;
-}
-
-.box_top_bar > label{
-	margin-left: 100px;
-}
 
 .box_players_overview{
 	border: 2px solid black;
@@ -56,9 +45,9 @@
 }
 
 .btn_start_game{
-	border: 4px solid red;
+	border: 2px solid red;
 	font-size: 28px;
-	background-color: green;
+	background-color: rgb(23, 95, 47);
 	padding: 30px;
 	margin: 20px;
 	border-radius: 20px;
