@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/darts/dart-gui/
+cd /home/pi/dart-gui/
 make run

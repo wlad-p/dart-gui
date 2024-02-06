@@ -47,7 +47,6 @@ void previous_player(){
 
 void remove_player(int player_id){
 
-	g_print("PLAYER state ID: %d \n", player_id);
 
 	for(int i = player_id; i < game.num_players; i++){
 

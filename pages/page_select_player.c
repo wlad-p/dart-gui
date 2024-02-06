@@ -58,7 +58,7 @@ GtkWidget *create_page_select_player(GtkWidget *window, GtkWidget *stack) {
 
     FILE *fp;
     char name[MAXCHAR];
-    fp = fopen("/home/darts/dart-gui/players.csv", "r");
+    fp = fopen("players.csv", "r");
     while(feof(fp) != true){
         fgets(name,MAXCHAR,fp);
         name[strcspn(name, "\n")] = 0;
